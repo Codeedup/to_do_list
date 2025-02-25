@@ -7,7 +7,7 @@ def add(task):
     try:    
         with open("data.csv", "a", newline="") as file:
                 writer = csv.writer(file)
-                writer.writerow(task)
+                writer.writerow([task])
                 print(f"Successfully added {task} to todo list!")
     except FileNotFoundError:
         print("Couldn't find file")                

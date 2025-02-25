@@ -11,7 +11,13 @@ def returner():
     with open("data.csv", "r") as file:
         try:
             info = list(csv.reader(file))
-            print(f"Here's what is in your to do list: {info}")
+
+            print(f"Here's what is in your to do list: ")            
+            for row in info:
+                print(" ".join(row))
+
+
+
         except FileNotFoundError:
             print("Error: FileNotFound")
 
