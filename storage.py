@@ -12,14 +12,19 @@ def returner():
         try:
             info = list(csv.reader(file))
 
+            i = 0
             print(f"Here's what is in your to do list: ")            
             for row in info:
-                print(" ".join(row))
-
+                i += 1
+                print(f"{i}. " + " ".join(row))
 
 
         except FileNotFoundError:
             print("Error: FileNotFound")
+
+
+
+
 
 
 
