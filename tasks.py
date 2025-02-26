@@ -2,13 +2,24 @@
 import csv
 from storage import saves, returner
 
-def add(task):
-        #todo add task to csv file
+
+def prioritize():
+    priority = input("What is the priority of this task?: 1. Low, 2. Medium, 3. High? ")
+    if priority == "1":
+        return "low"
+    if priority == "2":
+        return "medium"
+    if priority == "3":
+         return "high"    
+
+
+def add(task, priority_of):
+        #adds task to csv
     try:    
         with open("data.csv", "a", newline="") as file:
                 writer = csv.writer(file)
-                writer.writerow([task])
-                print(f"Successfully added {task} to todo list!")
+                writer.writerow([task] + [priority_of])
+                print(f"Successfully added {task} to todo list with {priority_of} priority!")
     except FileNotFoundError:
         print("Couldn't find file")                
 
@@ -36,6 +47,10 @@ def remove(task): #todo find simpler way for this on youtube
 
 
 def view():
-        #todo print the contents of CSV file
+        #print the contents of CSV file
         returner()
+
+
+
+     
 

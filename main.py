@@ -1,12 +1,12 @@
 # this will serve to get user input and 
-from tasks import add, remove, view
+from tasks import add, remove, view, prioritize
 
 
 #to do add task prioritization
 #to do add due dates 
 #to do add filtering 
 #to do add search function 
-#to do fix the storage function/ remove it 
+#remove it 
 #to do create headers for the csv file that make sense 
 
 
@@ -23,7 +23,8 @@ def main():
 
         if choice == "1":
             task = input("What would you like to add to the todo list?: ")
-            add(task)
+            priority_of = prioritize()
+            add(task, priority_of)
             break
         elif choice == "2":
             task = input("What would you like to remove?")
