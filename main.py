@@ -2,7 +2,6 @@
 from tasks import add, remove, view, prioritize
 
 
-#to do add task prioritization
 #to do add due dates 
 #to do add filtering 
 #to do add search function 
