@@ -15,6 +15,23 @@ def prioritize():
 
 def add(task, priority_of):
         #adds task to csv
+    try:
+        #check for header in the csv file and add one if it doesn't exist
+        with open("data.csv", "r") as file:
+            info = csv.reader(file)
+            first_row = next(info, None)
+    except FileNotFoundError:
+        first_row = None
+
+    if first_row is None or [col.strip().lower() for col in first_row] != ["task", "priority", "date"]:
+        try:
+                with open("data.csv", "w", newline="") as file:
+                    header = csv.writer(file)
+                    header.writerow(["Task", "Priority", "Date"])
+                    print("Successfully added a header")
+        except FileNotFoundError:            
+            print("Couldn't find file")
+
     try:    
         with open("data.csv", "a", newline="") as file:
                 writer = csv.writer(file)
@@ -25,6 +42,7 @@ def add(task, priority_of):
 
 
 def remove(task): #todo find simpler way for this on youtube 
+        # when removing print the whole list so you can see what to remove
         removed = task
         try:
             # reads data file and creates a list 
@@ -36,9 +54,9 @@ def remove(task): #todo find simpler way for this on youtube
                 updated_rows = [row for row in rows if row[1] != removed]
             
             # write updated list back into csv
-            with open("data.csv", "a", newline="") as file:
+            with open("data.csv", "w", newline="") as file:
                 writer = csv.writer(file)
-                writer.writerow(updated_rows)
+                writer.writerows(updated_rows)
                 print(f"Successfully removed {task} from todo list!")
         #display error if the file cant be found         
         except FileNotFoundError:
