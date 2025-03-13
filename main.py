@@ -26,11 +26,10 @@ def main():
             add(task, priority_of)
             break
         elif choice == "2":
-            task = input("What would you like to remove?")
+            task = input("What would you like to remove? ")
             remove(task)
             break
         elif choice == "3":
-            #todo fix how info is being stored (dont want separate characters want string)
             view()
             break
         
