@@ -1,5 +1,5 @@
 # this will serve to get user input and 
-from tasks import add, remove, view, prioritize, date, complete, task_state
+from tasks import add, remove, view, prioritize, date, complete, task_state, clean
 
 
 
@@ -16,6 +16,7 @@ def main():
         print("2. Remove from list")
         print("3. View List")
         print("4. Mark task as complete")
+        print("5. Clean up list(Remove Completed)")
 
         #takes user input
         choice = input("Please Pick From the list above: ")
@@ -39,6 +40,9 @@ def main():
             view()
             task = input("Which task do you want to mark as complete?: ")
             task_state(task)
+            break
+        elif choice == "5":
+            clean()
             break
         
 main()
