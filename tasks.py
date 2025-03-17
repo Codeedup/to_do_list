@@ -113,7 +113,24 @@ def view():
         #print the contents of CSV file
         returner()
 
+def clean():
+    try:
+        # reads data file and creates a list 
+        with open("data.csv", "r") as file:
+            rows = list(csv.reader(file))
+            header = rows[0]
+           
+            new_rows = [header]
+            if len(rows) > 1:
+                new_rows += [row for row in rows[1:] if row[0].strip().lower() != "completed"]
 
+        with open("data.csv", "w", newline="") as file:
+                writer = csv.writer(file)
+                writer.writerows(new_rows)
+
+        print(f"Successfully removed completed tasks from todo list!")
+    except FileNotFoundError:
+         print("Couldn't find file")
 
      
 
