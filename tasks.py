@@ -22,9 +22,41 @@ def date():
           return "No date added"
      else:
           return date
+     
+def complete():
+    return "Uncomplete"
+
+def task_state(task):
+    try:
+        completer = int(task) - 1
+    except TypeError:
+             print("Not an integer")
+    try:
+        # reads data file and creates a list 
+        with open("data.csv", "r") as file:
+            rows = list(csv.reader(file))
+            if len(rows) <= 1:
+                print("No tasks available to mark as completed.")
+                return
+
+            comp_check = rows[completer]
+            if comp_check[0].lower() == "completed":
+                print("Task is already marked as completed!")
+                return
+
+            comp_check[0] = "Completed"
+
+            with open("data.csv", "w", newline="") as file:
+                writer = csv.writer(file)
+                writer.writerows(rows)  # Write everything back (header + tasks)
+
+            print(f"Task '{comp_check[1]}' marked as completed successfully!")
 
 
-def add(task, priority_of, dated):
+    except FileNotFoundError:
+         print("Couldn't find the file")
+
+def add(comp, task, priority_of, dated):
         #adds task to csv
     try:
         #check for header in the csv file and add one if it doesn't exist
@@ -34,11 +66,12 @@ def add(task, priority_of, dated):
     except FileNotFoundError:
         first_row = None
 
-    if first_row is None or [col.strip().lower() for col in first_row] != ["task", "priority", "date"]:
+    correct_header = ["task_state", "task", "priority", "date"]
+    if first_row is None or [col.strip().lower() for col in first_row] != correct_header:
         try:
                 with open("data.csv", "w", newline="") as file:
                     header = csv.writer(file)
-                    header.writerow(["Task", "Priority", "Date"])
+                    header.writerow(correct_header)
                     print("Successfully added a header")
         except FileNotFoundError:            
             print("Couldn't find file")
@@ -46,13 +79,13 @@ def add(task, priority_of, dated):
     try:    
         with open("data.csv", "a", newline="") as file:
                 writer = csv.writer(file)
-                writer.writerow([task, priority_of, dated])
+                writer.writerow([comp, task, priority_of, dated])
                 print(f"Successfully added {task} to todo list with {priority_of} priority and the date {dated}!")
     except FileNotFoundError:
         print("Couldn't find file")                
 
 
-def remove(task): #todo find simpler way for this on youtube 
+def remove(task):
         # when removing print the whole list so you can see what to remove
         try:
             removed = int(task) - 1
