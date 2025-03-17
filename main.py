@@ -5,7 +5,6 @@ from tasks import add, remove, view, prioritize, date, complete, task_state
 
 #remove it 
 # add function to remove all completed tasks
-# add option to mark task as completed 
 
 
 
